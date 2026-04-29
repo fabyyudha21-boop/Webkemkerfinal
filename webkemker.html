@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GEODBD - WebGIS Surabaya</title>
+
+    <!-- FONT -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+        }
+
+        /* ================= NAVBAR ================= */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            background: white;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo {
+            height: 40px;
+        }
+
+        .title h2 {
+            font-size: 30px;
+            font-weight: 630;
+            margin: 0;              
+            line-height: 0.9;       
+        }
+        .title p {
+            font-size: 14px;
+            color: black;
+            margin: 2px 0 0 0;      
+            line-height: 1.2;
+        }
+        /* ========= NAVBAR (Menu Navigasi) ========= */
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 80px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: black;
+            font-weight: 500;
+        }
+
+        nav ul li a.active {
+            color: #c62828;
+        }
+
+        .btn-webgis {
+            background: #c62828;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 8px;
+            text-decoration: none;
+        }
+
+        /* ================= HERO ================= */
+        .hero {
+              height: 420px;
+              display: flex;
+              align-items: center;
+              padding: 0 40px;
+
+              background:
+        linear-gradient(to right, rgba(150,0,0,0.95) 45%, rgba(150,0,0,0.6) 65%, rgba(150,0,0,0.2) 80%, transparent 100%),
+        url('ASET/SURABAYA.png');
+
+         background-size: cover;
+         background-position: center;
+        }
+
+        .hero-left {
+            flex: 1;
+            color: white;
+            display: flex;
+            align-items: center;
+            padding: 40px;
+        }
+
+        .hero-right {
+            flex: 1;
+            background: url('ASET/SURABAYA.png');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            margin-top: 15px;
+            font-size: 20px;
+        }
+
+        .hero-btn {
+            margin-top: 30px;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #c62828;
+            padding: 10px 15px;
+            border-radius: 8px;
+            text-decoration: none;
+            margin-right: 10px;
+        }
+
+        .btn-secondary {
+            border: 1px solid white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            color: white;
+            text-decoration: none;
+        }
+
+        /* ================= OVERVIEW ================= */
+        .overview {
+            display: block;
+            padding: 50px 40px;
+        }
+
+        .overview-text {
+            margin-bottom: 40px;
+        }
+
+        .overview-text h4 {
+            color: #c62828;
+            font-size: 25px;
+        }
+
+        .overview-text p {
+            font-size: 14px;
+            margin-bottom: 12px;
+            text-align: justify;
+            line-height: 1.6;
+        }
+
+        .overview-box {
+            display: flex;
+            gap: 20px;
+        }
+
+        /* KONTAK */
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            flex: 1;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .icon {
+            width: 55px;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            color: #c62828;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            font-size: 14px;
+            line-height: 1.6;
+            text-align: center;
+        }    
+        /* HERO BARU */
+        .footer {
+            background: linear-gradient(to right, #8B0000, #B71C1C);
+            color: white;
+            padding: 40px;
+        }
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        .footer-bottom {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 13px;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+        .container {
+            max-width: 1800px;
+            margin: auto;
+            background: #ffffff;
+            padding: 30px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        .title {
+             color: #d32f2f;
+             font-weight: bold;
+             margin-bottom: 20px;
+             letter-spacing: 1px;
+             font-size: 25px;
+         }
+         .team {
+            display: flex;
+            gap: 20px;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        .card {
+            flex: 1;
+            min-width: 200px;
+            background: #fafafa;
+            border-radius: 12px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+            transition: 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .avatar {
+            width: 50px;
+            height: 50px;
+            background: #ffcdd2;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: #d32f2f;
+        }
+        .info {
+            line-height: 1.3;
+        }
+        .name {
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .nrp {
+          font-size: 12px;
+          color: #777;
+        }
+
+        .role {
+          font-size: 12px;
+          color: #555;
+        }
+        /* ================= FIX RESPONSIVE TAMBAHAN ================= */
+
+        /* Biar tidak melebar keluar layar */
+        body {
+            overflow-x: hidden;
+        }
+
+        /* Navbar biar wrap kalau sempit */
+        .navbar {
+            flex-wrap: wrap;
+        }
+
+        /* Menu biar turun kalau layar kecil */
+        nav ul {
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        /* HERO jadi fleksibel */
+        .hero {
+            flex-wrap: wrap;
+            height: auto;
+            padding: 40px 20px;
+        }
+
+        /* Hero kiri-kanan turun ke bawah */
+        .hero-left,
+        .hero-right {
+            flex: 1 1 100%;
+        }
+
+        /* Text hero biar tidak terlalu besar di layar kecil */
+        .hero h1 {
+            font-size: clamp(28px, 5vw, 48px);
+        }
+
+        .hero p {
+            font-size: clamp(14px, 2.5vw, 20px);
+        }
+
+        /* OVERVIEW card jadi turun */
+        .overview-box {
+            flex-wrap: wrap;
+        }
+
+        .overview-box .card {
+            flex: 1 1 300px;
+        }
+
+        /* TEAM biar rapi */
+        .team {
+            justify-content: center;
+        }
+
+        .team .card {
+            flex: 1 1 250px;
+        }
+
+        /* FOOTER biar tidak nabrak */
+        .footer-container {
+            flex-wrap: wrap;
+        }
+
+        /* ================= MEDIA QUERY ================= */
+        @media (max-width: 768px) {
+
+            .navbar {
+                padding: 15px 20px;
+            }
+
+            .hero {
+                padding: 30px 20px;
+            }
+
+            .overview {
+                padding: 30px 20px;
+            }
+
+            .container {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+
+            nav ul {
+                gap: 10px;
+                justify-content: center;
+            }
+
+            .hero-btn {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .btn-primary,
+            .btn-secondary {
+                width: 100%;
+                text-align: center;
+            }
+        }
+        /* ================= FINAL OVERVIEW FIX (PERFECT ALIGNMENT) ================= */
+            .overview-box {
+                display: flex;
+                gap: 30px;
+                align-items: stretch; /* semua card sama tinggi */
+            }
+
+            /* CARD */
+            .overview-box .card {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                gap: 12px; /* 🔥 spacing lebih konsisten */
+
+                padding: 35px 25px;
+                border-radius: 20px;
+                min-height: 320px; /* lebih stabil */
+            }
+
+            /* ICON */
+            .overview-box .icon {
+                width: 60px;
+            }
+            /* JUDUL */
+            .overview-box .card h3 {
+                font-size: 20px;
+                margin: 0;
+            }
+            /* DESKRIPSI */
+            .overview-box .card p {
+                font-size: 14px;
+                line-height: 1.7;
+                max-width: 250px;
+
+                margin: 0;
+                text-align: center;
+
+                flex-grow: 1;
+                display: flex;
+                align-items: flex-start; /* 🔥 ini bikin semua teks mulai dari garis yang sama */
+            /* SETINGAN BUAT NGATUR ICON FOTHER */
+            }
+            /* KONTAK ALIGN FIX */
+            .footer p {
+                display: flex;
+                align-items: center; /* 🔥 bikin sejajar vertikal */
+                gap: 10px;
+            }
+
+            /* ICON SIZE & POSISI */
+            .footer svg {
+                width: 20px;
+                height: 20px;
+                flex-shrink: 0;
+
+                position: relative;
+                top: -1px; /* 🔥 fine tuning biar sejajar banget */
+            }
+            /* ================= IKUTI KAMI ================= */
+            .social-container {
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                gap: 10px;          /* 🔥 lebih rapat */
+                margin-top: 10px;
+                padding-right: 30px; /* 🔥 tarik sedikit ke kiri dari tepi */
+            }
+
+            /* ICON */
+            .social-icon {
+                width: 35px;
+                height: 35px;
+
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                border-radius: 50%;
+                transition: all 0.25s ease;
+                cursor: pointer;
+            }
+
+            /* SVG */
+            .social-icon svg {
+                width: 26px;
+                height: 26px;
+                transition: all 0.25s ease;
+            }
+
+            /* 🔥 HOVER EFFECT */
+            .social-icon:hover {
+                transform: translateY(-3px);       /* naik dikit */
+                background: rgba(255,255,255,0.15); /* glow halus */
+            }
+
+            /* 🔥 ICON CHANGE */
+            .social-icon:hover svg {
+                stroke: white;
+            }
+
+            /* 🔥 CLICK EFFECT (REAL FEEL) */
+            .social-icon:active {
+                transform: scale(0.92); /* ditekan */
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <!-- NAVBAR -->
+        <header class="navbar">
+            <div class="logo-container">
+                <img src="ASET/ITS.png" class="logo">
+                <img src="ASET/GEOMATIKA.png" class="logo">
+                <img src="ASET/KEMKER.png" class="logo">
+                <img src="ASET/GEODBD.png" class="logo">
+
+                <div class="title">
+                    <h2>GEODBD</h2>
+                    <p>Environmental Geodesy for Dengue</p>
+                </div>
+            </div>
+
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">Beranda</a></li>
+                    <li><a href="#">Tentang</a></li>
+                    <li><a href="#">Kontak</a></li>
+                </ul>
+            </nav>
+
+            <a href="#" class="btn-webgis">WebGIS</a>
+        </header>
+
+        <!-- HERO -->
+        <section class="hero">
+
+            <div class="hero-left">
+                <div class="hero-content">
+                    <h1>
+                        Pemodelan Spasial <br>
+                        Risiko Genangan dan DBD <br>
+                        di Kota Surabaya
+                    </h1>
+
+                    <p>
+                        Analisis hubungan curah hujan, potensi genangan,
+                        dan persebaran penyakit DBD berbasis geodesi lingkungan
+                    </p>
+
+                    <div class="hero-btn">
+                        <a href="#" class="btn-primary">Lihat WebGIS</a>
+                        <a href="#" class="btn-secondary">Pelajari Lebih Lanjut</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-right"></div>
+
+        </section>
+
+         <!-- OVERVIEW -->
+        <section class="overview">
+            <!-- BAGIAN ATAS (RINGKASAN FULL) -->
+            <div class="overview-text">
+                <h4>OVERVIEW</h4>
+                <h2>Ringkasan Penelitian</h2>
+
+                <p>
+                    Kota Surabaya merupakan salah satu kota metropolitan di Indonesia yang memiliki karakteristik curah hujan tinggi, terutama pada musim penghujan. Intensitas hujan yang tinggi sering kali menyebabkan terjadinya genangan hingga banjir di berbagai wilayah kota. Kondisi ini tidak hanya berdampak pada aktivitas masyarakat dan infrastruktur, tetapi juga memengaruhi kondisi lingkungan yang menjadi faktor penting dalam penyebaran penyakit berbasis lingkungan. Lingkungan yang lembap serta adanya genangan air berpotensi menjadi habitat ideal bagi vektor penyakit, khususnya nyamuk Aedes aegypti yang berperan dalam penyebaran Demam Berdarah Dengue (DBD).
+                </p>
+
+                <p>
+                    Seiring dengan meningkatnya kasus DBD di Kota Surabaya dalam beberapa tahun terakhir, diperlukan pendekatan yang lebih komprehensif untuk memahami faktor-faktor yang memengaruhi penyebarannya. Salah satu pendekatan yang dapat dilakukan adalah melalui analisis spasial berbasis geodesi lingkungan untuk mengkaji hubungan antara variabilitas curah hujan, potensi daerah rawan genangan, dan risiko kejadian DBD. Dengan adanya pemodelan spasial ini, diharapkan dapat dihasilkan informasi berupa peta risiko yang dapat digunakan sebagai dasar dalam perencanaan mitigasi serta pengendalian penyakit secara lebih efektif dan tepat sasaran.
+                </p>
+            </div>
+            <!-- BAGIAN BAWAH (CARD) -->
+            <div class="overview-box">
+                <div class="card">
+                    <img src="ASET/masalah.png" class="icon">
+                    <h3>Masalah</h3>
+                    <p>
+                        Variabilitas curah hujan dan potensi genangan di Kota Surabaya diduga memiliki keterkaitan dengan peningkatan risiko Demam Berdarah Dengue (DBD), namun hubungan spasial antar variabel tersebut belum teridentifikasi secara jelas.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <img src="ASET/tujuan.png" class="icon">
+                    <h3>Tujuan</h3>
+                    <p>
+                        Menganalisis hubungan antara variabilitas curah hujan dan potensi genangan terhadap risiko DBD serta menghasilkan pemodelan peta risiko sebagai dasar pendukung pengendalian penyakit.
+                    </p>
+                </div>
+
+                <div class="card">
+                    <img src="ASET/manfaat.png" class="icon">
+                    <h3>Manfaat</h3>
+                    <p>
+                        Memberikan informasi spasial terkait risiko DBD untuk mendukung perencanaan mitigasi oleh instansi terkait serta meningkatkan kesadaran masyarakat terhadap pentingnya menjaga lingkungan.
+                    </p>
+                </div>
+
+    </section> 
+    <!-- OUR TEAM -->
+                <div class="container">
+      <div class="title">OUR TEAM</div>
+
+      <div class="team">
+
+        <div class="card">
+          <img src="ASET/Fayra.png" class="avatar">
+          <div class="info">
+            <div class="name">Fayra Alifya Annisa</div>
+            <div class="nrp">NRP 5016231028</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="ASET/Yudha.png" class="avatar">
+          <div class="info">
+            <div class="name">Faby Yudha Santoso</div>
+            <div class="nrp">NRP 5016231058</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="ASET/Oken.png" class="avatar">
+          <div class="info">
+            <div class="name">Oken Liza Tri Cahya</div>
+            <div class="nrp">NRP 5016231085</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="ASET/Rifqi.png" class="avatar">
+          <div class="info">
+            <div class="name">Rifqi Pangestu Wiguna</div>
+            <div class="nrp">NRP 5016231105</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <img src="ASET/Intan.png" class="avatar">
+          <div class="info">
+            <div class="name">Intan Nur Fadhila Sari</div>
+            <div class="nrp">NRP 5016231116</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    </section>    <!-- KONTAK / FOOTER -->
+        <footer id="kontak" class="footer">
+            <div class="footer-container">
+
+            <div>
+                <h2>GEODBD</h2>
+                <p>
+                    Kelompok 10 Field Camp Thematic <br>
+                    Laboratorium Geodesi dan Geodinamika <br>
+                    Departemen Teknik Geomatika <br>
+                    Fakultas Teknik Sipil, Perencanaan dan Kebumian <br>
+                    Institut Teknologi Sepuluh Nopember
+                </p>
+            </div>
+
+            <div>
+                <h3>Kontak</h3>
+              <p>
+                  <!-- EMAIL ICON -->
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                    <rect x="2" y="4" width="20" height="16" rx="2" stroke="white" stroke-width="2"/>
+                    <path d="M2 6L12 13L22 6" stroke="white" stroke-width="2"/>
+                  </svg>
+                  geodyncamp10@gmail.com
+              </p>
+
+            <p>
+                <!-- LOCATION ICON -->
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                    <path d="M12 22C12 22 4 16 4 10C4 6.68629 7.13401 4 12 4C16.866 4 20 6.68629 20 10C20 16 12 22 12 22Z" stroke="white" stroke-width="2"/>
+                    <circle cx="12" cy="10" r="3" stroke="white" stroke-width="2"/>
+                  </svg>
+                  Surabaya, Indonesia
+            </p>
+            </div>
+
+            <div>
+                <h3>Tautan Cepat</h3>
+                <p><a href="#">Beranda</a></p>
+                <p><a href="#">Tentang</a></p>
+                <p><a href="#">WebGIS</a></p>
+            </div>
+
+            <div>
+                <h3>Ikuti Kami</h3>
+             
+                 <div class="social-container">
+                <!-- IG -->
+                <a href="https://www.instagram.com/sepu10holicz/" target="_blank" class="social-icon">
+                    <svg viewBox="0 0 24 24" fill="none">
+                        <rect x="3" y="3" width="18" height="18" rx="5" stroke="white" stroke-width="2"/>
+                        <circle cx="12" cy="12" r="4" stroke="white" stroke-width="2"/>
+                        <circle cx="17" cy="7" r="1.5" fill="white"/>
+                    </svg>
+                </a>
+
+                <!-- EMAIL -->
+                <a href="mailto:geodyncamp10@gmail.com" class="social-icon">
+                    <svg viewBox="0 0 24 24" fill="none">
+                        <rect x="2" y="4" width="20" height="16" rx="2" stroke="white" stroke-width="2"/>
+                        <path d="M2 6L12 13L22 6" stroke="white" stroke-width="2"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            © 2024 GEODBD — Kelompok 10 Lab Geodesi Geodinamika
+        </div>
+
+    </footer>
+            </div>
